@@ -1,9 +1,14 @@
 module UrlShortener
   URL_CHARS = ('0'..'9').to_a + %w(b c d f g h j k l m n p q r s t v w x y z)
-  URL_BASE = URL_CHARS.size	
+  URL_BASE = URL_CHARS.size
 
   def self.included(base)
     base.before_create :generate_key
+    base.named_scope :by_key, lambda {|key| {:conditions => ["key = ?", key] }}
+  end
+
+  def to_param
+    self.key || self.id
   end
 
   def generate_key
