@@ -20,3 +20,5 @@ end
 The mixin will automatically save the passkey upon create.
 
 It also provides a scope called :by_passkey that you can use as a finder method.
+
+MyModel.by_passkey("eXaMp1E")
