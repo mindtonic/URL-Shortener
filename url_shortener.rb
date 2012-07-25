@@ -12,7 +12,7 @@ module UrlShortener
   end
 
   def generate_key
-		self.update_attribute(:passkey, generate_passkey)
+    self.update_attribute(:passkey, generate_passkey)
   end
 
   def generate_passkey
