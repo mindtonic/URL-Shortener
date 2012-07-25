@@ -12,7 +12,7 @@ end
 Then simply include the mixin in the model.
 
 class MyModel < ActiveRecord::Base
-  include URL-Shortener
+  include UrlShortener
 
   ...
 end
