@@ -3,7 +3,7 @@ module UrlShortener
   URL_BASE = URL_CHARS.size
 
   def self.included(base)
-    base.before_create :generate_passkey
+    base.after_create :generate_passkey
     base.scope :by_passkey, lambda { |passkey| where(:passkey => passkey) }
   end
 
@@ -12,14 +12,15 @@ module UrlShortener
   end
 
   def generate_key
-    self.passkey = generate_passkey(self.id)
+		self.update_attribute(:passkey, generate_passkey)
   end
 
-  def generate_passkey(id)
+  def generate_passkey
+    idn = self.id
     passkey = ''
-    while id != 0
-      r = id % URL_BASE
-      id = (id - r) / URL_BASE
+    while idn != 0
+      r = idn % URL_BASE
+      idn = (idn - r) / URL_BASE
       passkey << URL_CHARS[r]
     end
     passkey
