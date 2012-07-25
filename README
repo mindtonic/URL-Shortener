@@ -4,22 +4,18 @@ This mixin for ActiveRecord creates a YouTube like url extensions, obstensively 
 
 To use, add a migration to the desired model that creates a string called :passkey, and be sure you index it!
 
-```
 def change
   add_column :my_table_name, :passkey, :string
   add_index  :my_table_name, :passkey
 end
-```
 
 Then simply include the mixin in the model.
 
-```
 class MyModel < ActiveRecord::Base
   include URL-Shortener
 
   ...
 end
-```
 
 The mixin will automatically save the passkey upon create.
 
